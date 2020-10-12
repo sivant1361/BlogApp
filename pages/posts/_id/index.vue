@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">Title of the Post</h1>
+      <h1 class="post-title">{{loadedPost.title}}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on XXX</div>
-        <div class="post-detail">Written by NAME</div>
+        <div class="post-detail">Last updated on {{loadedPost.updatedDate}}</div>
+        <div class="post-detail">Written by {{loadedPost.author}}</div>
       </div>
-      <p class="post-content">Content of the Post</p>
+      <p class="post-content">{{loadedPost.content}}</p>
     </section>
     <section class="post-feedback">
       <p>Let me know what you think about the post, send a mail to <a href="mailto:kingstarr1361@gmail.com">kingstarr1361@gmail.com</a>.</p>
@@ -14,6 +14,25 @@
   </div>
 </template>
 
+<script>
+export default {
+  asyncData(context,callback) {
+    setTimeout(()=>{
+      callback(null,{
+        loadedPost:{
+          id:'1',
+          title: 'First Post(ID : '+context.route.params.id+')',
+          previewText:'My First Post',
+          author:'King',
+          updatedDate:new Date().toISOString(),
+          content:'Content for the first Post',
+          thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTE5pOr4wI-1ZPNraeKVgETQLUOD0CD1QPWow&usqp=CAU'
+        }
+      });
+    },1000)
+  }
+}
+</script>
 <style scoped>
   .single-post-page {
   padding: 30px;
